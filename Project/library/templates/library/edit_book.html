@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+    <title>Edytuj książkę</title>
+</head>
+<body>
+
+<h1>Edytuj książkę</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Zapisz zmiany</button>
+</form>
+
+<a href="/library/">Powrót</a>
+
+</body>
+</html>
