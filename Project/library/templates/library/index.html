@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <title>Cyfrowa Biblioteka</title>
+
+<style>
+  body { font-family: Arial; margin: 30px; }
+  table { border-collapse: collapse; width: 700px; }
+  th, td { border: 1px solid #ccc; padding: 8px; }
+  th { background: #f2f2f2; }
+</style>
+
+</head>
+<body>
+
+<h1>Cyfrowa Biblioteka</h1>
+
+<form method="get">
+    <input type="text" name="q" placeholder="Szukaj książki" value="{{ q }}">
+    <button type="submit">Szukaj</button>
+</form>
+
+<br>
+
+<a href="/library/add/">Dodaj nową książkę</a>
+
+<br><br>
+
+{% if books %}
+<table>
+<tr>
+<th>Tytuł</th>
+<th>Autor</th>
+<th>Rok</th>
+<th>Akcje</th>
+</tr>
+
+{% for book in books %}
+<tr>
+<td><strong>{{ book.title }}</strong></td>
+<td>{{ book.author }}</td>
+<td>{{ book.publication_year }}</td>
+<td>
+<a href="/library/edit/{{ book.id }}/">Edytuj</a>
+<a href="/library/delete/{{ book.id }}/">Usuń</a>
+</td>
+</tr>
+{% endfor %}
+
+</table>
+{% else %}
+<p>Brak książek w bazie.</p>
+{% endif %}
+
+</body>
+</html>

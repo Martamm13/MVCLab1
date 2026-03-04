@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+    <title>Dodaj książkę</title>
+</head>
+<body>
+
+<h1>Dodaj książkę</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Zapisz</button>
+</form>
+
+<a href="/library/">Powrót do listy</a>
+
+</body>
+</html>
