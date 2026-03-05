@@ -1,16 +1,22 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book
 from .forms import BookForm
+from django.db.models import Q
+
 
 def index(request):
-    query = request.GET.get("q")
+    q = (request.GET.get("q") or "").strip()
+    books = Book.objects.all()
 
-    if query:
-        books = Book.objects.filter(title__icontains=query)
-    else:
-        books = Book.objects.all().order_by("title")
+    if q:
+        books = books.filter(
+            Q(title__icontains=q) |
+            Q(author__name__icontains=q) |
+            Q(publication_year__icontains=q)
+        )
 
-    return render(request, "library/index.html", {"books": books})
+    return render(request, "library/index.html", {"books": books, "q": q})
+
 
 def add_book(request):
     if request.method == "POST":
@@ -23,8 +29,9 @@ def add_book(request):
 
     return render(request, "library/add_book.html", {"form": form})
 
+
 def edit_book(request, id):
-    book = Book.objects.get(id=id)
+    book = get_object_or_404(Book, id=id)
 
     if request.method == "POST":
         form = BookForm(request.POST, instance=book)
@@ -36,7 +43,12 @@ def edit_book(request, id):
 
     return render(request, "library/edit_book.html", {"form": form})
 
+
 def delete_book(request, id):
-    book = Book.objects.get(id=id)
-    book.delete()
-    return redirect("index")
+    book = get_object_or_404(Book, id=id)
+
+    if request.method == "POST":
+        book.delete()
+        return redirect("index")
+
+    return render(request, "library/delete_book.html", {"book": book})
