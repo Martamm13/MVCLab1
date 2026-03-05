@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>Wypożycz książkę</title>
+</head>
+<body>
+
+<h1>Wypożycz książkę</h1>
+
+<p>
+<strong>{{ book.title }}</strong> — {{ book.author }} ({{ book.publication_year }})
+</p>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Wypożycz</button>
+</form>
+
+<br>
+<a href="/library/">Powrót</a>
+
+</body>
+</html>

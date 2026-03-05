@@ -1,6 +1,12 @@
 from django import forms
 from django.utils import timezone
 from .models import Book
+from .models import Borrowing, Person
+
+class BorrowingForm(forms.ModelForm):
+    class Meta:
+        model = Borrowing
+        fields = ["person"]
 
 class BookForm(forms.ModelForm):
     class Meta:

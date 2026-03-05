@@ -33,6 +33,7 @@
 <th>Tytuł</th>
 <th>Autor</th>
 <th>Rok</th>
+<th>Status</th>
 <th>Akcje</th>
 </tr>
 
@@ -41,10 +42,26 @@
 <td><strong>{{ book.title }}</strong></td>
 <td>{{ book.author }}</td>
 <td>{{ book.publication_year }}</td>
+
+<td>
+{% if book.is_borrowed %}
+<strong>Wypożyczona</strong>
+{% else %}
+<strong>Dostępna</strong>
+{% endif %}
+</td>
+
 <td>
 <a href="/library/edit/{{ book.id }}/">Edytuj</a>
 <a href="/library/delete/{{ book.id }}/">Usuń</a>
+
+{% if book.is_borrowed %}
+  <a href="/library/return/{{ book.id }}/">Oddaj</a>
+{% else %}
+  <a href="/library/borrow/{{ book.id }}/">Wypożycz</a>
+{% endif %}
 </td>
+
 </tr>
 {% endfor %}
 
