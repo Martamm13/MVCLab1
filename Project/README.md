@@ -136,3 +136,5 @@ Project/
 ├── mysite/
 │
 └── manage.py
+
+Projekt wykonany w ramach laboratorium MVC.
