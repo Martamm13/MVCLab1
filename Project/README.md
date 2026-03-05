@@ -1,3 +1,7 @@
+## Autor
+
+Projekt został wykonany przez Marta D.
+
 Cyfrowa Biblioteka – Django MVC
 Spis treści
 
@@ -137,4 +141,4 @@ Project/
 │
 └── manage.py
 
-Projekt wykonany w ramach laboratorium MVC.
+Projekt wykonany w ramach laboratorium MVC przez Marta D.
